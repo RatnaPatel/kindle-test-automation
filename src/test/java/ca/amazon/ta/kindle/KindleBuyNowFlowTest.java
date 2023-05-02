@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import ca.amazon.ta.common.pages.ProductPage;
 import ca.amazon.ta.common.pages.SignInPage;
 import ca.amazon.ta.common.test.TestNgTestBase;
+import ca.amazon.ta.common.util.RetryAnalyzer;
 import ca.amazon.ta.kindle.pages.HomePageKindleExtension;
 
 public class KindleBuyNowFlowTest extends TestNgTestBase {
@@ -22,6 +23,7 @@ public class KindleBuyNowFlowTest extends TestNgTestBase {
   @Test
   public void testKindleBuyNowFlow() {
 	  driver.get(baseUrl);
+	  
 	  ProductPage kindleProductPage = homePage.selectKindle();
 	  SignInPage signInPage = kindleProductPage.buyNow();  
 	  Assert.assertNotNull(signInPage.getEmailOrPhoneInput());

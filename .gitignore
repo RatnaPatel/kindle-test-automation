@@ -27,3 +27,7 @@ replay_pid*
 */.classpath
 */target/
 */test-output/
+.classpath
+.factorypath
+allure-results/
+target/

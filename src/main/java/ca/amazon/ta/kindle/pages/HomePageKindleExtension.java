@@ -11,7 +11,7 @@ import ca.amazon.ta.common.pages.HomePage;
 import ca.amazon.ta.common.pages.ProductPage;
 
 /**
- * Kindel specific page customization
+ * Kindle specific page customization
  */
 public class HomePageKindleExtension extends HomePage {
 
