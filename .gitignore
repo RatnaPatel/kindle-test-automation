@@ -31,3 +31,4 @@ replay_pid*
 .factorypath
 allure-results/
 target/
+test-output/

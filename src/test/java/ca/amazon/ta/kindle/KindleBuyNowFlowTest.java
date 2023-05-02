@@ -1,31 +1,42 @@
 package ca.amazon.ta.kindle;
 
-import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import ca.amazon.ta.common.pages.ProductPage;
-import ca.amazon.ta.common.pages.SignInPage;
-import ca.amazon.ta.common.test.TestNgTestBase;
-import ca.amazon.ta.common.util.RetryAnalyzer;
-import ca.amazon.ta.kindle.pages.HomePageKindleExtension;
+import ca.amazon.ta.common.test.BaseTest;
+import ca.amazon.ta.steps.HomeSteps;
+import ca.amazon.ta.steps.ProductSteps;
+import ca.amazon.ta.steps.SignInSteps;
 
-public class KindleBuyNowFlowTest extends TestNgTestBase {
+public class KindleBuyNowFlowTest extends BaseTest {
 
-  private HomePageKindleExtension homePage;
+	private HomeSteps homeSteps;
+	private ProductSteps productSteps;
+	private SignInSteps signInSteps;
 
-  @BeforeMethod
-  public void initPageObjects() {
-    homePage = PageFactory.initElements(driver, HomePageKindleExtension.class);
-  }
+	@BeforeClass(alwaysRun = true)
+	public void setupClass() {
+		this.homeSteps = HomeSteps.using(driver);
+		this.productSteps = ProductSteps.using(driver);
+		this.signInSteps = SignInSteps.using(driver);
+	}
 
+	@BeforeMethod(alwaysRun = true)
+	public void testSetup() {
+		homeSteps.goToHomePage();
+	}
+	
   @Test
   public void testKindleBuyNowFlow() {
-	  driver.get(baseUrl);
-	  
-	  ProductPage kindleProductPage = homePage.selectKindle();
-	  SignInPage signInPage = kindleProductPage.buyNow();  
-	  Assert.assertNotNull(signInPage.getEmailOrPhoneInput());
+	  homeSteps.clickHambergerMenu();
+	  Assert.assertTrue(homeSteps.isHambergerMenuPoppedUp(), "Something wrong!");
+	  homeSteps.selectKindleProduct();
+	  productSteps.goToProductPage();//dummy.. no use
+	  Assert.assertTrue(productSteps.isBuyNowPresent(), "Product Page not loaded!");
+	  productSteps.clickOnBuyNow();
+	  signInSteps.goToSignInPage();//dummy.. no use
+	  Assert.assertTrue(signInSteps.isEmailOrPhoneInputPresent(), "Email field not present on the page!");
   }
 }
