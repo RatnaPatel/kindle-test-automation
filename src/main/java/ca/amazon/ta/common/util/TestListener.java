@@ -18,7 +18,7 @@ import org.testng.ITestResult;
 import ca.amazon.ta.common.test.BaseTest;
 import io.qameta.allure.Attachment;
 
-/*
+/**
  * ITestListener listens to specific events (depending on its methods) and executes the code written 
  * inside the method.
  * In this class Logger implementation is also done as sample representation.

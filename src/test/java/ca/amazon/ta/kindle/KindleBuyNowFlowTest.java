@@ -13,7 +13,7 @@ import ca.amazon.ta.steps.HomeSteps;
 import ca.amazon.ta.steps.ProductSteps;
 import ca.amazon.ta.steps.SignInSteps;
 
-/*
+/**
  * This is a test class. 
  */
 @Listeners(TestListener.class)

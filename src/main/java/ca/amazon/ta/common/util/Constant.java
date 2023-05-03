@@ -2,7 +2,7 @@ package ca.amazon.ta.common.util;
 
 import ca.amazon.ta.common.config.Configuration;
 
-/*
+/**
  * This is a utility class to declare and define static variable
  */
 public final class Constant {
