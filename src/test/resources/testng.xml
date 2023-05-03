@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Tests" verbose="5">
+	<!--<listeners>
+		<listener class-name="ca.amazon.ta.common.util.AnnotationTransformer" />
+	</listeners>-->
+	<listeners>
+		<listener class-name="ca.amazon.ta.common.util.TestListener" />
+	</listeners>
+	<test name="KindleBuyNowFlowTest">
+		<!--<parameter name="browser" value="chrome"></parameter>-->
+		<classes>
+			<class name="ca.amazon.ta.kindle.KindleBuyNowFlowTest" />
+		</classes>
+	</test>
+	<!--<test name="Firefox Test" thread-count="3" parallel="classes"
+		skipfailedinvocationcounts="true" time-out="200">
+		<parameter name="browser" value="firefox" />
+		<classes>
+			<class name="ca.amazon.ta.kindle.KindleBuyNowFlowTest" />
+		</classes>
+	</test>
+	<test name="Edge Test" thread-count="2" parallel="classes"
+		skipfailedinvocationcounts="true" time-out="200">
+		<parameter name="browser" value="edge" />
+		<classes>
+			<class name="ca.amazon.ta.kindle.KindleBuyNowFlowTest" />
+		</classes>
+	</test>-->
+
+</suite>
