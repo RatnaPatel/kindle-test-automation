@@ -3,7 +3,6 @@ package ca.amazon.ta.common.pages;
 import static ca.amazon.ta.common.util.Constant.DEFAULT_WEB_DRIVER_WAIT;
 import static ca.amazon.ta.common.util.Constant.GLOBAL_TIMEOUT;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Nullable;
@@ -16,10 +15,9 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import ca.amazon.ta.common.config.Configuration;
-
 /**
  * Abstract class representation of a Page in the UI. Page object pattern
+ * followed.
  */
 public abstract class BasePage {
 
@@ -27,25 +25,19 @@ public abstract class BasePage {
 
 	protected WebDriverWait wait;
 
-	protected static String baseUrl;
 	/*
-	 * Constructor injecting the WebDriver interface
+	 * Constructor injecting the WebDriver interface. Added wait in case page does
+	 * not load
 	 * 
-	 * @param webDriver
+	 * @param webDriver, String
 	 */
 	public BasePage(WebDriver driver, String pageLoadConfimationId) {
 		this.driver = driver;
-		//this.driver.manage().window().maximize();
 		this.driver.manage().timeouts().implicitlyWait(DEFAULT_WEB_DRIVER_WAIT, TimeUnit.SECONDS);
 		this.wait = new WebDriverWait(this.driver, GLOBAL_TIMEOUT);
-		if(pageLoadConfimationId != null) {
-			wait.until(ExpectedConditions.presenceOfElementLocated(By.id(pageLoadConfimationId)));	
+		if (pageLoadConfimationId != null) {
+			wait.until(ExpectedConditions.presenceOfElementLocated(By.id(pageLoadConfimationId)));
 		}
-		try {
-			this.baseUrl = new Configuration().getProperty("site.url");
-		} catch (IOException e) {
-			throw new IllegalStateException("Properties of application are invalid");
- 		}
 	}
 
 	public boolean isElementPresent(By by) {
@@ -56,6 +48,7 @@ public abstract class BasePage {
 			return false;
 		}
 	}
+
 	public WebElement getElement(By by) {
 		try {
 			return driver.findElement(by);
@@ -78,10 +71,10 @@ public abstract class BasePage {
 			@Override
 			public Object apply(@Nullable WebDriver driver) {
 				/*
-				 * Wait until the element's .isDisplayed is true(which is essentially what
-				 * visibilityOfElementLocated is checking for) Wait until the element's
-				 * .isEnabled is true which is essentially what the elementToBeClickable is
-				 * checking for
+				 * Wait until the element's .isDisplayed is true (which is essentially what
+				 * visibilityOfElementLocated is checking for). Wait until the element's
+				 * isEnabled is true (which is essentially what elementToBeClickable is checking
+				 * for)
 				 */
 				return element.isDisplayed() && element.isEnabled();
 			}

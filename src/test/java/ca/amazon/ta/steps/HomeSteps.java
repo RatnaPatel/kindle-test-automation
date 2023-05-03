@@ -7,41 +7,42 @@ import ca.amazon.ta.pages.HomePage;
 import io.qameta.allure.Step;
 
 /**
- *  steps on hope page
+ * steps on hope page. Steps added for Allure reports
  */
 public class HomeSteps extends BaseSteps {
 
-private static HomeSteps stepObj;
-	
+	private static HomeSteps stepObj;
+
 	protected HomeSteps(WebDriver driver) {
 		super(driver);
 	}
-	
+
 	public static HomeSteps using(WebDriver driver) {
 		if (stepObj == null) {
 			stepObj = new HomeSteps(driver);
 		}
 		return stepObj;
 	}
-	
-	@Step
+
+	@Step("1. Launch amazon.ca")
 	public void goToHomePage() {
 		HomePage.using(driver).goToHomePage();
 	}
-	
-	@Step
+
+	@Step("2. Click on left hamberger menu.")
 	public void clickHambergerMenu() {
 		HomePage.using(driver).clickHamburgerMenu();
 	}
-	@Step
+
+	@Step("3. Verify hamberger menu opened successfully.")
 	public boolean isHambergerMenuPoppedUp() {
 		return HomePage.using(driver).isHambuergerMenuPoppedUp();
 	}
-	
-	@Step
+
+	@Step("4. Select Kindle option.")
 	public void selectKindleProduct() {
 		HomePage.using(driver).selectKindleMenu();
 		HomePage.using(driver).selectKindleProduct();
 	}
-	
+
 }

@@ -14,7 +14,7 @@ public class SignInPage extends BasePage {
 	private static final String EMAIL_ID = "ap_email";
 
 	private static SignInPage pageObj;
-	
+
 	public SignInPage(WebDriver webDriver) {
 		super(webDriver, EMAIL_ID);
 	}
@@ -29,11 +29,11 @@ public class SignInPage extends BasePage {
 	public SignInPage goToSignInPage() {
 		return this;
 	}
-	
+
 	public boolean isEmailOrPhoneInputPresent() {
 		return isElementPresent(By.id(EMAIL_ID));
 	}
-	
+
 	public WebElement getEmailOrPhoneInput() {
 		return getElement(By.id(EMAIL_ID));
 	}

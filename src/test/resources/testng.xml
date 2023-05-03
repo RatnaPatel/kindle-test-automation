@@ -4,7 +4,10 @@
 	<!--<listeners>
 		<listener class-name="ca.amazon.ta.common.util.AnnotationTransformer" />
 	</listeners>-->
-	<test name="KindleBuyNowFlowTest" >
+	<listeners>
+		<listener class-name="ca.amazon.ta.common.util.TestListener" />
+	</listeners>
+	<test name="KindleBuyNowFlowTest">
 		<!--<parameter name="browser" value="chrome"></parameter>-->
 		<classes>
 			<class name="ca.amazon.ta.kindle.KindleBuyNowFlowTest" />

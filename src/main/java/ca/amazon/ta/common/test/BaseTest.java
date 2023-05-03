@@ -7,10 +7,10 @@ import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 
 import ca.amazon.ta.common.config.Configuration;
+import ca.amazon.ta.common.util.Constant;
 import ru.stqa.selenium.factory.WebDriverPool;
 
 /**
@@ -18,34 +18,43 @@ import ru.stqa.selenium.factory.WebDriverPool;
  */
 public class BaseTest {
 
-  protected static URL gridHubUrl = null;
-  protected static String baseUrl;
-  protected static Capabilities capabilities;
+	protected static URL gridHubUrl = null;
+	protected static String baseUrl;
+	protected static Capabilities capabilities;
 
-  protected WebDriver driver;
+	protected WebDriver driver;
 
-  @BeforeSuite
-  public void initTestSuite() throws IOException {
-    Configuration config = new Configuration();
-    baseUrl = config.getProperty("site.url");
-    if (config.hasProperty("grid.url") && !"".equals(config.getProperty("grid.url"))) {
-      gridHubUrl = new URL(config.getProperty("grid.url"));
-    }
-    capabilities = config.getCapabilities();
-  }
+	/*
+	 * Setting grid url and capabilities before execution of tests from test suit
+	 */
+	@BeforeSuite
+	public void initTestSuite() throws IOException {
+		Configuration config = Configuration.getInstance();
+		if (config.hasProperty(Constant.GRID_URL) && !"".equals(config.getProperty(Constant.GRID_URL))) {
+			gridHubUrl = new URL(config.getProperty(Constant.GRID_URL));
+		}
+		capabilities = config.getCapabilities();
+	}
 
-  @BeforeClass
-  public void initWebDriver() {
-    driver = WebDriverPool.DEFAULT.getDriver(gridHubUrl, capabilities);
-  }
+	/*
+	 * Creating instance of web driver with given capabilities
+	 */
+	@BeforeClass
+	public void initWebDriver() {
+		driver = WebDriverPool.DEFAULT.getDriver(gridHubUrl, capabilities);
+	}
 
-  @AfterSuite(alwaysRun = true)
-  public void tearDown() {
-    WebDriverPool.DEFAULT.dismissAll();
-  }
+	/*
+	 * It must executes after completion of test run Quits all web drivers and
+	 * emptying web driver pool.
+	 */
+	@AfterSuite(alwaysRun = true)
+	public void tearDown() {
+		WebDriverPool.DEFAULT.dismissAll();
+	}
 
 	public WebDriver getDriver() {
 		return driver;
 	}
-  
+
 }

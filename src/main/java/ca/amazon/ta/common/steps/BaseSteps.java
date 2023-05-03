@@ -5,6 +5,9 @@ import static ca.amazon.ta.common.util.Constant.DEFAULT_WEB_DRIVER_WAIT;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+/*
+ * Base Step class to inject web driver in abstract layer
+ */
 public class BaseSteps {
 
 	protected WebDriver driver;
